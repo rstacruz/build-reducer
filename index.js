@@ -6,7 +6,9 @@ module.exports = function buildReducer (reducers, defaultState) {
       state = defaultState
     }
 
+    if (!reducers.hasOwnProperty(action.type)) return state
+
     var fn = reducers[action.type]
-    return fn ? fn(state, action) : state
+    return fn(state, action)
   }
 }

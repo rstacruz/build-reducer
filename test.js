@@ -2,6 +2,7 @@ var test = require('tape')
 var build = require('./index')
 
 var output
+var NIL = { passthru: true }
 
 test('buildReducer()', function (t) {
   var red = build({
@@ -14,13 +15,16 @@ test('buildReducer()', function (t) {
   })
 
   output = red({}, { type: 'reset' })
-  t.equal(output, 0)
+  t.equal(output, 0, '"reset" action')
 
   output = red(5, { type: 'add', payload: 10 })
-  t.equal(output, 15)
+  t.equal(output, 15, '"add" action')
 
-  output = red({ passthru: true }, { type: '@@redux/INIT' })
-  t.deepEqual(output, { passthru: true })
+  output = red(NIL, { type: '@@redux/INIT' })
+  t.equal(output, NIL, 'passthru')
+
+  output = red(NIL, { type: 'toString' })
+  t.equal(output, NIL, 'dont call builtins')
 
   t.end()
 })
