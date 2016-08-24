@@ -9,6 +9,8 @@ module.exports = function buildReducer (reducers, defaultState) {
     if (!reducers.hasOwnProperty(action.type)) return state
 
     var fn = reducers[action.type]
+    if (typeof fn !== 'function') return state
+
     return fn(state, action)
   }
 }
