@@ -4,6 +4,8 @@
 
 build-reducers lets you write [Redux] reducers as individual functions, rather than one huge `switch` block.
 
+[![Status](https://travis-ci.org/rstacruz/build-reducer.svg?branch=master)](https://travis-ci.org/rstacruz/build-reducer "See test builds")
+
 ```js
 import buildReducers from 'build-reducers'
 import {createStore} from 'redux'
