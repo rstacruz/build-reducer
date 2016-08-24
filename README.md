@@ -51,6 +51,35 @@ let store = createStore(reducer)
 ```
 </details>
 
+<br>
+
+## Install
+
+```
+npm install --save build-reducer
+```
+
+build-reducer is available via npm.
+
+```js
+var buildReducer = require('build-reducer')    // ES5
+import buildReducer from 'build-reducer'       // ES2015+
+```
+
+<br>
+
+## API
+
+### buildReducer
+
+> `buildReducer(reducer, [defaultState])`
+
+Creates a function that calls methods from `reducer` based on the given action type.
+
+`defaultState` is optional; if given, it will be used as the state if the state is currently `undefined`.
+
+<br>
+
 ## More examples
 
 <details>
@@ -109,6 +138,8 @@ const reducer = buildReducer({
 </details>
 
 [Redux]: http://redux.js.org
+
+<br>
 
 ## Thanks
 
