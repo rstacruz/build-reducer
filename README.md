@@ -68,6 +68,27 @@ const reducer = buildReducer({
 ```
 </details>
 
+<details>
+<summary>If you prefer to use `CONSTANTS` instead of strings, you can do that with ES2015's computed property names syntax.</summary>
+
+```js
+const RESET = 'RESET'
+const LOAD_PROFILE = 'LOAD_PROFILE'
+const RESET_PROFILE = 'RESET_PROFILE'
+
+const reducer = buildReducer({
+  [RESET] () {
+    return {}
+  },
+  [LOAD_PROFILE] (state, {payload}) {
+    return { ...state, profile: payload }
+  },
+  [RESET_PROFILE] (state, action) {
+    return { ...state, profile: {} }
+  }
+})
+```
+</details>
 
 <details>
 <summary>build-reducer doesn't need ES2015. You can write your reducers in plain ES5.</summary>
