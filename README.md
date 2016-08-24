@@ -1,13 +1,16 @@
-# build-reducers
+# build-reducer
 
 > Write Redux reducers with simpler syntax
 
-build-reducers lets you write [Redux] reducers as individual functions, rather than one huge `switch` block.
+build-reducer lets you write [Redux] reducers as individual functions, rather than one huge `switch` block.
 
 [![Status](https://travis-ci.org/rstacruz/build-reducer.svg?branch=master)](https://travis-ci.org/rstacruz/build-reducer "See test builds")
 
+<details open>
+<summary>With build-reducer, writing reducers is fun using the ES2015 syntax!</summary>
+
 ```js
-import buildReducers from 'build-reducers'
+import buildReducer from 'build-reducer'
 import {createStore} from 'redux'
 
 const reducer = buildReducer({
@@ -24,14 +27,13 @@ const reducer = buildReducer({
 
 let store = createStore(reducer)
 ```
-
-If you were to write this without build-reducers, you'd have to use a big `switch` block.
+</details>
 
 <details>
-<summary>Traditional Redux example</summary>
+<summary>If you were to write this without build-reducer, you'd have to use a big `switch` block.</summary>
 
 ```js
-/* Traditional Redux reducer without build-reducers */
+/* Traditional Redux reducer without build-reducer */
 function reducer (state, action) {
   switch (action.type) {
     case 'reset':
@@ -51,41 +53,39 @@ let store = createStore(reducer)
 
 ## More examples
 
-- You can use the implicit return arrow syntax to build shorter functions.
+<details>
+<summary>You can use the implicit return arrow syntax if you have very simple functions.</summary>
 
-  <details>
-  <summary>See example</summary>
+```js
+const reducer = buildReducer({
+  'reset':
+    () => {}
+  'profile:load':
+    (state, {payload}) => ({ ...state, profile: payload })
+  'profile:reset':
+    (state, action) => ({ ...state, profile: {} })
+})
+```
+</details>
 
-  ```js
-  /* build-reducers reducer */
-  const reducer = buildReducer({
-    'reset': () => {}
-    'profile:load': (state, {payload}) => { ...state, profile: payload }
-    'profile:reset': (state, action) => { ...state, profile: {} }
-  })
-  ```
-  </details>
 
-- build-reducers doesn't need ES2015. You can write your reducers in plain ES5.
+<details>
+<summary>build-reducer doesn't need ES2015. You can write your reducers in plain ES5.</summary>
 
-  <details>
-  <summary>See example</summary>
-
-  ```js
-  /* build-reducers */
-  const reducer = buildReducer({
-    'reset': function () {
-      return {}
-    },
-    'profile:load': function (state, {payload}) {
-      return Object.assign({}, state, { profile: payload })
-    },
-    'profile:reset': function (state, action) {
-      return Object.assign({}, state, { profile: {} })
-    }
-  })
-  ```
-  </details>
+```js
+const reducer = buildReducer({
+  'reset': function () {
+    return {}
+  },
+  'profile:load': function (state, action) {
+    return Object.assign({}, state, { profile: action.payload })
+  },
+  'profile:reset': function (state, action) {
+    return Object.assign({}, state, { profile: {} })
+  }
+})
+```
+</details>
 
 [Redux]: http://redux.js.org
 
