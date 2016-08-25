@@ -88,7 +88,7 @@ Creates a function that calls methods from `reducer` based on the given action t
 ```js
 const reducer = buildReducer({
   'reset':
-    () => {}
+    () => ({})
   'profile:load':
     (state, {payload}) => ({ ...state, profile: payload })
   'profile:reset':
